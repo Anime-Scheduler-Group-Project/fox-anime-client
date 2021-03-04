@@ -12,101 +12,323 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Fox Anime</title>
   </head>
   <body>
-    <h1 text-align="justify">FoxAnime</h1>
+    <!-- Navigation -->
+    <section id="navigation">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+          <a id="link-anime-list" class="navbar-brand" href="#">FoxAnime</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div id="nav-links" class="navbar-nav ms-auto">
+              <a id="link-image-search" class="nav-link" href="#"
+                >Anime Reverse Image Search</a
+              >
+              <a id="link-sign-out" class="nav-link" href="#">Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
 
-    <!-- Ubah2 disini -->
-    
+    <!-- Login -->
+    <section id="login">
+      <div class="container my-5 p-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-sm-10">
+            <div class="card shadow-lg">
+              <div class="card-header px-4">
+                <h1 class="card-title my-1 text-center">Greetings!</h1>
+              </div>
+              <div class="card-body p-4 m-2">
+                <div class="login error-message"></div>
+                <form id="form-login" method="POST">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="name@example.com"
+                      name="email"
+                    />
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      name="password"
+                    />
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                      Login
+                    </button>
+                    <a id="anchor-to-register" class="btn btn-success" href="#"
+                      >Don't have an account?</a
+                    >
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Register -->
+    <section id="register">
+      <div class="container my-5 p-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-sm-10">
+            <div class="card shadow-lg">
+              <div class="card-header px-4">
+                <h1 class="card-title my-1 text-center">Create Account</h1>
+              </div>
+              <div class="card-body p-4 m-2">
+                <div class="error-message"></div>
+                <form id="form-register" method="POST">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="name@example.com"
+                      name="email"
+                    />
+                    <label>Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      name="password"
+                    />
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="John Doe"
+                      name="name"
+                    />
+                    <label>Name</label>
+                  </div>
+                  <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-lg btn-primary">
+                      Register
+                    </button>
+                    <a id="anchor-to-login" class="btn btn-success" href="#"
+                      >Already have an account?</a
+                    >
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- List Anime -->
     <section id="list-anime">
-    <!-- ISI LIST ANIME LU DISINI -->
+      <!-- ISI LIST ANIME LU DISINI -->
       <div class="container">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
-              <img src="https://cdn.myanimelist.net/images/anime/1000/110531.jpg" style="height: 18rem;" class="card-img-top" alt="">
+              <img
+                src="https://cdn.myanimelist.net/images/anime/1000/110531.jpg"
+                style="height: 18rem"
+                class="card-img-top"
+                alt=""
+              />
               <div class="card-body">
                 <h5 class="card-title">Shingeki no Kyojin: The Final Season</h5>
                 <h6>episode: ###</h6>
                 <h6>score: ###</h6>
-                <p class="card-text">Gabi Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis.</p>
-                <a href="" class="btn btn-primary">Caclulate holiday</a>
+                <p class="card-text">
+                  Gabi Braun and Falco Grice have been training their entire
+                  lives to inherit one of the seven titans under Marley's
+                  control and aid their nation in eradicating the Eldians on
+                  Paradis.
+                </p>
+                <a id="anime-calculate-1" href="" class="btn btn-primary"
+                  >Caclulate holiday</a
+                >
               </div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5XotCEH9ArqQ5LFWNbl022awdyGAh0NI2A&usqp=CAU" class="card-img-top" style="height: 18rem;" alt="">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5XotCEH9ArqQ5LFWNbl022awdyGAh0NI2A&usqp=CAU"
+                class="card-img-top"
+                style="height: 18rem"
+                alt=""
+              />
               <div class="card-body">
                 <h5 class="card-title">Shingeki no Kyojin: The Final Season</h5>
                 <h6>episode: ###</h6>
                 <h6>score: ###</h6>
-                <p class="card-text">Gabi Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis.</p>
-                <a href="" class="btn btn-primary">Caclulate holiday</a>
+                <p class="card-text">
+                  Gabi Braun and Falco Grice have been training their entire
+                  lives to inherit one of the seven titans under Marley's
+                  control and aid their nation in eradicating the Eldians on
+                  Paradis.
+                </p>
+                <a id="anime-calculate-2" href="" class="btn btn-primary"
+                  >Caclulate holiday</a
+                >
               </div>
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnTGmpvIX4EasD18Uwqxnsr9fGXL7XQAbGhQ&usqp=CAU" class="card-img-top" style="height: 18rem;" alt="">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnTGmpvIX4EasD18Uwqxnsr9fGXL7XQAbGhQ&usqp=CAU"
+                class="card-img-top"
+                style="height: 18rem"
+                alt=""
+              />
               <div class="card-body">
                 <h5 class="card-title">Shingeki no Kyojin: The Final Season</h5>
                 <h6>episode: ###</h6>
                 <h6>score: ###</h6>
-                <p class="card-text">Gabi Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis.</p>
-                <a href="" class="btn btn-primary">Caclulate holiday</a>
+                <p class="card-text">
+                  Gabi Braun and Falco Grice have been training their entire
+                  lives to inherit one of the seven titans under Marley's
+                  control and aid their nation in eradicating the Eldians on
+                  Paradis.
+                </p>
+                <a id="anime-calculate-3" href="" class="btn btn-primary"
+                  >Caclulate holiday</a
+                >
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <br><br><br>
+
     <!-- Form input -->
     <section id="form-input">
       <div class="container">
-        <div class="row ">
+        <div class="row">
           <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
-              <img src="https://cdn.myanimelist.net/images/anime/1000/110531.jpg" style="height: 18rem;" class="card-img-top" alt="">
+              <img
+                src="https://cdn.myanimelist.net/images/anime/1000/110531.jpg"
+                style="height: 18rem"
+                class="card-img-top"
+                alt=""
+              />
               <div class="card-body">
                 <h5 class="card-title">Shingeki no Kyojin: The Final Season</h5>
-                <p class="card-text">Gabi Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis.</p><hr>
-                <label for="">enter the number of episodes you will watch per day:</label>
-                <div class="input-group mb-100 mx-auto">
-                  <input type="text" class="form-control">
-                  <a href="" class="btn btn-primary">Submit</a>
-                </div>
+                <p class="card-text">
+                  Gabi Braun and Falco Grice have been training their entire
+                  lives to inherit one of the seven titans under Marley's
+                  control and aid their nation in eradicating the Eldians on
+                  Paradis.
+                </p>
+                <hr />
+                <label for=""
+                  >enter the number of episodes you will watch per day:</label
+                >
+                <form id="form-episode-per-day" method="POST">
+                  <div class="input-group mb-100 mx-auto">
+                    <input type="text" class="form-control" />
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <br><br><br>
 
     <!-- Show calculation date -->
-    <section id="calculation-date" >
+    <section id="calculation-date">
       <div class="container mt-1">
-          <div class="row">
-            <div class="col-md-8 mx-auto">
-              <ul class="list-group mx-auto mt-5 ms-1" >
-                <li class="list-group-item">Name:</li>
-                <li class="list-group-item">Location:</li>
-                <li class="list-group-item">Date:</li>
-              </ul>
-            </div>
+        <h1>Holidays</h1>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <ul class="list-group mx-auto mt-5 ms-1">
+              <li class="list-group-item">Name:</li>
+              <li class="list-group-item">Location:</li>
+              <li class="list-group-item">Date:</li>
+            </ul>
           </div>
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <ul class="list-group mx-auto mt-5 ms-1">
+              <li class="list-group-item">Name:</li>
+              <li class="list-group-item">Location:</li>
+              <li class="list-group-item">Date:</li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <ul class="list-group mx-auto mt-5 ms-1">
+              <li class="list-group-item">Name:</li>
+              <li class="list-group-item">Location:</li>
+              <li class="list-group-item">Date:</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-    <!-- Ubah2 disini -->
+    <!-- search image -->
+    <section id="search-image">
+      <div class="container">
+        <div class="navbar navbar-expand-lg navbar-light bg-light">
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- detail-image -->
+    <section id="card-detail-image">
+      <div class="container">
+        <div class="card" style="width: 18rem">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name:</li>
+            <li class="list-group-item">episode:</li>
+          </ul>
+        </div>
+      </div>
+    </section>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
