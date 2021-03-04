@@ -17,7 +17,7 @@ $(() => {
       data,
     })
       .done((token) => {
-        setStorage(token)
+        setStorage(token.access_token)
         showOnly('#list-anime')
       })
       .fail((error) => {
@@ -52,7 +52,6 @@ $(() => {
 
   $('#link-anime-list').on('click', (event) => {
     event.preventDefault()
-    console.log(localStorage[storageKey])
     if (!localStorage[storageKey]) showOnly('#login')
     else showOnly('#list-anime')
   })
@@ -64,18 +63,34 @@ $(() => {
 
   $('#link-sign-out').on('click', (event) => {
     event.preventDefault()
-    delete localStorage[storageKey]
-    showOnly('#login')
+    var auth2 = gapi.auth2.getAuthInstance()
+    auth2.signOut().then(function () {
+      delete localStorage[storageKey]
+      showOnly('#login')
+    })
+  })
+
+  $('#form-image-search').on('submit', (event) => {
+    event.preventDefault()
+    const data = parseInput('#form-image-search')
+    $('#table-image-search').empty()
+    $.ajax({
+      method: 'POST',
+      url: generateURL('imageAnime'),
+      headers: { access_token: getStorage() },
+      data,
+    })
+      .done((result) => {
+        result.forEach((e) => {
+          $('#table-image-search').append(tableImageSearch(e))
+        })
+      })
+      .fail((error) => console.error(error))
   })
 
   $('[id*="anime-calculate-"]').on('click', (event) => {
     event.preventDefault()
     showOnly('#form-input')
-  })
-
-  $('#form-episode-per-day').on('submit', (event) => {
-    event.preventDefault()
-    showOnly('#calculation-date')
   })
 })
 
@@ -87,7 +102,33 @@ function showOnly(selector) {
   } else {
     $('#nav-links').show()
   }
-  $(selector).show()
+
+  if (selector !== '#list-anime') return $(selector).show()
+  $('#list-view-anime').empty()
+  $.ajax({
+    url: generateURL('anime'),
+    headers: { access_token: localStorage[storageKey] },
+  })
+    .done((data) => {
+      data.anime.forEach((anime) => {
+        $('#list-view-anime').append(cardAnimeItem(anime))
+        $(`#anime-calculate-${anime.index}`).on('click', (event) => {
+          event.preventDefault()
+
+          $('#form-input').empty()
+          $('#form-input').append(bigCardAnime(anime))
+          $('#form-episode-per-day').on('submit', (event) => {
+            event.preventDefault()
+            showOnly('#calculation-date')
+          })
+          showOnly('#form-input')
+        })
+      })
+    })
+    .fail((error) => {
+      console.error(error)
+    })
+    .always(() => $(selector).show())
 }
 
 function setStorage(key) {
@@ -98,6 +139,8 @@ function getStorage(key) {
   return localStorage[storageKey]
 }
 
+// modular components
+
 function errorAlert(error) {
   return `
   <div class="alert alert-danger" role="alert">
@@ -106,13 +149,84 @@ function errorAlert(error) {
   `
 }
 
+function tableImageSearch(data) {
+  return `<tr>
+    <td>${data.anime}</td>
+  </tr>`
+}
+
+function cardAnimeItem(anime) {
+  return `<div class="col-12 col-md-6 col-lg-4">
+    <div class="card">
+      <img
+        src="${anime.image_url}"
+        style="height: 24rem; width:auto"
+        class="card-img-top"
+        alt=""
+      />
+      <div class="card-body">
+        <h5 class="card-title text-truncate ">${anime.title}</h5>
+        <h6>episode: ${anime.episodes}</h6>
+        <h6>score: ${anime.score}</h6>
+        <p class="card-text text-truncate ">
+          ${anime.synopsis}
+        </p>
+        <div class="row">
+        <div class="col"></div>
+        <div class="col-auto">
+          <a id="anime-calculate-${anime.index}" href="" class="btn btn-primary">
+            Im busy, when can i watch?
+          </a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+}
+
+function bigCardAnime(anime) {
+  return `<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <img
+            src="${anime.image_url}"
+            style="height: 30rem"
+            class="card-img-top"
+            alt=""
+          />
+          <div class="card-body">
+            <h5 class="card-title">${anime.title}</h5>
+            <h6>episode: ${anime.episodes}</h6>
+            <h6>score: ${anime.score}</h6>
+            <p class="card-text">
+              ${anime.synopsis}
+            </p>
+            <hr />
+            <label for="">
+              enter the number of episodes you will watch per day:
+            </label>
+            <form id="form-episode-per-day" method="POST">
+              <div class="input-group mb-100 mx-auto">
+                <input type="number" class="form-control" />
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+}
+
 // helpers
 
 const generateURL = (str) => apiURL + str
 
 const errorHandler = (partial, error) => {
   $(`${partial} .error-message`).empty()
-  console.log(partial)
   error.responseJSON.message.forEach((error) => {
     $(`${partial} .error-message`).append(errorAlert(error))
   })
@@ -129,20 +243,19 @@ const parseInput = (value) => {
 
 function onSignIn(googleUser) {
   let id_token = googleUser.getAuthResponse().id_token
-  console.log(id_token)
   $.ajax({
-      method: 'POST',
-      url: "http://localhost:3000/oauth",
-      data: {
-          token: id_token 
-      }
+    method: 'POST',
+    url: generateURL('oauth'),
+    data: {
+      token: id_token,
+    },
   })
-      .done(response => {
-          console.log(response)
-          localStorage.setItem('access_token', response.id_token)
-          showOnly('#list-anime')
-      })
-      .fail(err => {
-          console.log(err)
-      })
+    .done((response) => {
+      console.log(response)
+      localStorage.setItem(storageKey, response.access_token)
+      showOnly('#list-anime')
+    })
+    .fail((err) => {
+      console.log(err)
+    })
 }
