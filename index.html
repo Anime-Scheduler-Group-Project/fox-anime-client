@@ -4,7 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="google-signin-client_id" content="636059639551-clc057eg9a0o450ntluv53pgpbpi3lnn.apps.googleusercontent.com">
+    <meta
+      name="google-signin-client_id"
+      content="636059639551-clc057eg9a0o450ntluv53pgpbpi3lnn.apps.googleusercontent.com"
+    />
 
     <!-- Bootstrap CSS -->
     <link
@@ -83,10 +86,9 @@
                     <a id="anchor-to-register" class="btn btn-success" href="#"
                       >Don't have an account?</a
                     >
-                    <div class = 'container text-center' >
-                      <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                      
-                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                   </div>
                 </form>
               </div>
@@ -95,10 +97,6 @@
         </div>
       </div>
     </section>
-    
- 
-    
-   
 
     <!-- Register -->
     <section id="register">
@@ -157,9 +155,9 @@
 
     <!-- List Anime -->
     <section id="list-anime">
-      <!-- ISI LIST ANIME LU DISINI -->
       <div class="container">
-        <div class="row">
+        <h1>Top Seasonal Anime</h1>
+        <div id="list-view-anime" class="row g-4">
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
               <img
@@ -235,16 +233,15 @@
         </div>
       </div>
     </section>
-
     <!-- Form input -->
     <section id="form-input">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-6">
+          <div class="col-12">
             <div class="card">
               <img
                 src="https://cdn.myanimelist.net/images/anime/1000/110531.jpg"
-                style="height: 18rem"
+                style="height: 30rem"
                 class="card-img-top"
                 alt=""
               />
@@ -307,14 +304,16 @@
     <!-- search image -->
     <section id="search-image">
       <div class="container">
-        <form>
+        <h1>Anime reverse image search</h1>
+        <form id="form-image-search" method="POST">
           <div class="row">
             <div class="col">
               <input
                 class="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Image URL here"
                 aria-label="Search"
+                name="url"
               />
             </div>
             <div class="col-auto">
@@ -322,6 +321,14 @@
             </div>
           </div>
         </form>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Anime</th>
+            </tr>
+          </thead>
+          <tbody id="table-image-search"></tbody>
+        </table>
       </div>
     </section>
 
