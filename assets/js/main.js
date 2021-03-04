@@ -57,6 +57,11 @@ $(() => {
     else showOnly('#list-anime')
   })
 
+  $('#link-image-search').on('click', (event) => {
+    event.preventDefault()
+    showOnly('#search-image')
+  })
+
   $('#link-sign-out').on('click', (event) => {
     event.preventDefault()
     delete localStorage[storageKey]
