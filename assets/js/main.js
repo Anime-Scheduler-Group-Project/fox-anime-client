@@ -126,3 +126,23 @@ const parseInput = (value) => {
       return result
     }, {})
 }
+
+function onSignIn(googleUser) {
+  let id_token = googleUser.getAuthResponse().id_token
+  console.log(id_token)
+  $.ajax({
+      method: 'POST',
+      url: "http://localhost:3000/oauth",
+      data: {
+          token: id_token 
+      }
+  })
+      .done(response => {
+          console.log(response)
+          localStorage.setItem('access_token', response.id_token)
+          showOnly('#list-anime')
+      })
+      .fail(err => {
+          console.log(err)
+      })
+}
