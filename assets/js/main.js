@@ -131,7 +131,8 @@ function showOnly(selector) {
               data: { episodes, episodePerDay },
             })
               .done((result) => {
-                result.data.forEach((e) => {
+                result.data.forEach((e, i) => {
+                  e.index = i + 1
                   $('#list-calculation-date').append(calculateDateItems(e))
                 })
                 showOnly('#calculation-date')
@@ -239,13 +240,12 @@ function bigCardAnime(anime) {
 }
 
 function calculateDateItems(holiday) {
-  return `<div class="col-lg-4 col-md-6 col-sm-12">
-    <ul class="list-group mx-auto mt-5 ms-1">
-      <li class="list-group-item">${holiday.name}</li>
-      <li class="list-group-item">${holiday.country}</li>
-      <li class="list-group-item">${new Date(holiday.date).toDateString()}</li>
-    </ul>
-  </div>`
+  return `<tr>
+    <th scope="row">${holiday.index}</th>
+    <td>${holiday.name}</td>
+    <td>${holiday.country}</td>
+    <td>${new Date(holiday.date).toDateString()}</td>
+  </tr>`
 }
 
 // helpers
