@@ -119,7 +119,24 @@ function showOnly(selector) {
           $('#form-input').append(bigCardAnime(anime))
           $('#form-episode-per-day').on('submit', (event) => {
             event.preventDefault()
-            showOnly('#calculation-date')
+            let { episodePerDay } = parseInput('#form-episode-per-day')
+            let episodes = $('#anime-episodes').text()
+            episodePerDay = +episodePerDay
+            episodes = +episodes
+            $('#list-calculation-date').empty()
+            $.ajax({
+              method: 'POST',
+              url: generateURL('holidays'),
+              headers: { access_token: getStorage() },
+              data: { episodes, episodePerDay },
+            })
+              .done((result) => {
+                result.data.forEach((e) => {
+                  $('#list-calculation-date').append(calculateDateItems(e))
+                })
+                showOnly('#calculation-date')
+              })
+              .fail((error) => console.error(error))
           })
           showOnly('#form-input')
         })
@@ -197,7 +214,7 @@ function bigCardAnime(anime) {
           />
           <div class="card-body">
             <h5 class="card-title">${anime.title}</h5>
-            <h6>episode: ${anime.episodes}</h6>
+            <h6>episode: <span id="anime-episodes">${anime.episodes}</span></h6>
             <h6>score: ${anime.score}</h6>
             <p class="card-text">
               ${anime.synopsis}
@@ -208,7 +225,7 @@ function bigCardAnime(anime) {
             </label>
             <form id="form-episode-per-day" method="POST">
               <div class="input-group mb-100 mx-auto">
-                <input type="number" class="form-control" />
+                <input type="number" min="1" class="form-control" name="episodePerDay"/>
                 <button type="submit" class="btn btn-primary">
                   Submit
                 </button>
@@ -218,6 +235,16 @@ function bigCardAnime(anime) {
         </div>
       </div>
     </div>
+  </div>`
+}
+
+function calculateDateItems(holiday) {
+  return `<div class="col-lg-4 col-md-6 col-sm-12">
+    <ul class="list-group mx-auto mt-5 ms-1">
+      <li class="list-group-item">${holiday.name}</li>
+      <li class="list-group-item">${holiday.country}</li>
+      <li class="list-group-item">${new Date(holiday.date).toDateString()}</li>
+    </ul>
   </div>`
 }
 
